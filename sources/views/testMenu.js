@@ -3,9 +3,11 @@ import {JetView} from "webix-jet";
 export default class testMenu extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let testButton = { 
 			view:"button", 
-			label:"Test", 
+			label:_("Test"), 
 			width:120,
 			align:"center",
 			click: ()=>{
@@ -15,7 +17,7 @@ export default class testMenu extends JetView{
 
 		let resultButton = { 
 			view:"button", 
-			label:"Results", 
+			label:_("Results"), 
 			width:120,
 			align:"center",
 			click: ()=>{

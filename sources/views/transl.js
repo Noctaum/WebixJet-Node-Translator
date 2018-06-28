@@ -4,10 +4,12 @@ import * as word from "models/word";
 export default class DataTable extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let search = {
 			view:"search", 
 			icon:"search",
-			placeholder:"Write word",
+			placeholder:_("Write word"),
 			on:{
 				onTimedKeyPress:()=>this.filterLoad()
 			}

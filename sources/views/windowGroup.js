@@ -6,14 +6,16 @@ import {group} from "models/group";
 export default class WindowEdit extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let form = {
 			view:"form",
 			elements:[{
 				rows:[ 
-					{view: "textarea", label:"Name", name:"name", height:40},
+					{view: "textarea", label:_("Name"), name:"name", height:40},
 					{
 						view:"multicombo", 
-						label:"Words", 
+						label:_("Words"), 
 						tagMode: false,
 						name:"words",
 						suggest: {
@@ -27,7 +29,7 @@ export default class WindowEdit extends JetView{
 						cols:[
 							{
 								view:"button",
-								label:"Save",
+								label:_("Save"),
 								type:"form",
 								click: () => { 
 									let popForm = this.getRoot().queryView({view:"form"});
@@ -50,7 +52,7 @@ export default class WindowEdit extends JetView{
 							},
 							{
 								view:"button", 
-								label:"Cancel", 
+								label:_("Cancel"), 
 								click:() => {
 									this.hideFunction();
 								}
@@ -75,6 +77,8 @@ export default class WindowEdit extends JetView{
 		return pop;
 	}
 	init(){
+		const _ = this.app.getService("locale")._;
+		
 		let multicombo = this.getRoot().queryView({view:"multicombo"});
 		let list = multicombo.getPopup().getList();
 		list.parse(word.getData("All"));
@@ -82,7 +86,7 @@ export default class WindowEdit extends JetView{
 			let root = this.getRoot();
 			root.queryView({view:"form"}).setValues(data);
 			let text;
-			data.id ? text = "Edit" : text = "Add";
+			data.id ? text = _("Edit") : text = _("Add");
 			root.getHead().setValues(text);
 			root.queryView({view:"button", type:"form"}).setValue(text);
 

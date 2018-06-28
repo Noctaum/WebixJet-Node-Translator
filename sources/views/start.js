@@ -4,6 +4,8 @@ import withoutRegistr from "views/templates/withoutRegistr";
 
 export default class Start extends JetView{
 	config(){
+
+		const _ = this.app.getService("locale")._;
 		
 		let user = this.app.getService("user").getUser();
 		let header;
@@ -24,10 +26,10 @@ export default class Start extends JetView{
 			multiview: true,
 			minWidth:450,
 			options:[
-				{id:"transl", icon: "globe", value: "Translate"},
-				{id:"word", icon: "book", value: "Words"},
-				{id:"group", icon: "list-alt", value: "Groups"},
-				{id:"testMenu", icon: "comment", value: "Test"},
+				{id:"transl", icon: "globe", value: _("Translate")},
+				{id:"word", icon: "book", value: _("Words")},
+				{id:"group", icon: "list-alt", value: _("Groups")},
+				{id:"testMenu", icon: "comment", value: _("Test")},
 			],
 			on:{
 				onAfterTabClick: (id)=>{

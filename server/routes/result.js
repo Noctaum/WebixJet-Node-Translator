@@ -8,7 +8,12 @@ let metods = {
 			if(err){
 				console.log("ERROR!");
 			} else {
-				res.json(data);
+				let length = data.length;
+				let mass = data;
+				for(let i = 0; i<length; i++){
+					mass[i].order = i+1;
+				}
+				res.json(mass);
 			}
 		});
 	},

@@ -1,5 +1,5 @@
 .deleteButton{
-	width:60px;
+	width:80px;
 	text-align: center;
 	font-weight:bold;
 	float:right;
@@ -10,7 +10,7 @@
 }
 
 .editButton{
-	width:60px;
+	width:80px;
 	text-align: center;
 	font-weight:bold;
 	float:right;

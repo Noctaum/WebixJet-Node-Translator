@@ -3,9 +3,11 @@ import {JetView} from "webix-jet";
 export default class DataTable extends JetView{
 	config(){
 
+	const _ = this.app.getService("locale")._;
+
 	let backBut = { 
 		view:"button", 
-		value:"Cancel",
+		value:_("Cancel"),
 		click: ()=>{
 			this.show(`../start/transl`);
 		}
@@ -13,7 +15,7 @@ export default class DataTable extends JetView{
 
 	let addBut = {
 		view:"button", 
-		value:"Login" , 
+		value:_("Login"), 
 		type:"form",
 		click:()=>{
 			let values = this.getRoot().queryView({view:"form"}).getValues();
@@ -34,8 +36,8 @@ export default class DataTable extends JetView{
 		view:"form", 
 		width:300,
 		elements:[
-			{ view:"text", label:"Email", name:"username"},
-			{ view:"text", type:"password", label:"Password", name:"password"},
+			{ view:"text", label:_("Email"), name:"username"},
+			{ view:"text", type:"password", label:_("Password"), name:"password"},
 			{ 
 				margin:5, 
 				cols:[
@@ -55,9 +57,11 @@ export default class DataTable extends JetView{
 	}
 	
 	urlChange(view){
+		const _ = this.app.getService("locale")._;
+		
 		let user = this.getParam("user",true);
 		let templ;
-		user === "new" ? templ = "Sign in" : templ = "Log in";
+		user === "new" ? templ = _("Sign in") : templ = _("Log in");
 		view.queryView({view:"button", type:"form"}).setValue(templ);
 	}
 

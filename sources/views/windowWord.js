@@ -5,18 +5,20 @@ import * as word from "models/word";
 export default class WindowEdit extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let form = {
 			view:"form",
 			elements:[{
 				rows:[ 
-					{view: "textarea", label:"Word", name:"word", height:50},
-					{view: "textarea", label:"Translate", name:"translate",height:50},
-					{view:"combo", label:"Part of speech", options:{data:part}, name:"partSpeech",labelPosition:"top"},
+					{view: "textarea", label:_("Word"), name:"word", height:50},
+					{view: "textarea", label:_("Translate"), name:"translate",height:50},
+					{view:"combo", label:_("Part of speech"), options:{data:part}, name:"partSpeech",labelPosition:"top"},
 					{
 						cols:[
 							{
 								view:"button",
-								label:"Save",
+								label:_("Save"),
 								type:"form",
 								click: () => { 
 									let popForm = this.getRoot().queryView({view:"form"});
@@ -32,7 +34,7 @@ export default class WindowEdit extends JetView{
 							},
 							{
 								view:"button", 
-								label:"Cancel", 
+								label:_("Cancel"), 
 								click:() => {
 									this.hideFunction();
 								}
@@ -58,11 +60,13 @@ export default class WindowEdit extends JetView{
 		return pop;
 	}
 	init(){
+		const _ = this.app.getService("locale")._;
+		
 		this.on(this.app, "dataEditWord", (data) => {
 			let root = this.getRoot();
 			root.queryView({view:"form"}).setValues(data);
 			let text;
-			data.id ? text = "Edit" : text = "Add";
+			data.id ? text = _("Edit") : text = _("Add");
 			root.getHead().setValues(text);
 			root.queryView({view:"button", type:"form"}).setValue(text);
 		});

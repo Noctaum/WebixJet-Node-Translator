@@ -5,10 +5,12 @@ import WindowEdit from "views/windowWord";
 export default class DataTable extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 		let search = {
 			view:"search", 
 			icon:"search",
-			placeholder:"Write word",
+			placeholder:_("Write word"),
 			on:{
 				onTimedKeyPress:()=>this.filterLoad()
 			}
@@ -16,14 +18,14 @@ export default class DataTable extends JetView{
 
 		let addBut = {
 			view:"button", 
-			value:"Add new",
+			value:_("Add new"),
 			click: ()=> this.callWindow({}),
 		};
 
 		let list =  {
 			view: "list",
 			select:true,
-			template:`#word# - #translate# <span class='editButton'>Edit</span> <span class='deleteButton'>Remove</span>`,
+			template:`#word# - #translate# <span class='editButton'>${_("Edit")}</span> <span class='deleteButton'>${_("Remove")}</span>`,
 			onClick:{
 				deleteButton:(e, id)=>{
 					word.deleteData(id);

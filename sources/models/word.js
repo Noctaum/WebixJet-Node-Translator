@@ -38,11 +38,11 @@ export function deleteData(id){
     });
 };
 
-// export function dataForTest(value){
-//     return webix.ajax().get(APIURL+"/test", {filter: value}, function(text, json){
-//     	template(json, messages.get, false);
-//     });
-// };
+export function dataFromGroup(value){
+    return webix.ajax().get(APIURL+"/test", {filter: value}, function(text, json){
+    	template(json, messages.get, false);
+    });
+};
 
 function template(json, message, display){
 	let data = json.json();

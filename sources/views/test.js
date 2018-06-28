@@ -12,10 +12,12 @@ let markOneWord;
 export default class test extends JetView{
 	config(){
 
+		const _ = this.app.getService("locale")._;
+
 //Start game
 		let label = {
 			view:"label",
-			label:"Choose group for test",
+			label:_("Choose group for test"),
 		};
 
 		let list =  {
@@ -26,7 +28,7 @@ export default class test extends JetView{
 
 		let startButton = { 
 			view:"button", 
-			label:"Start", 
+			label:_("Start"), 
 			width:120,
 			align:"center",
 			click:()=>{
@@ -117,7 +119,7 @@ export default class test extends JetView{
 //End game 
 		let endLabel = {
 			view:"label",
-			label:"End Game",
+			label:_("End Game"),
 			align:'center',
 		};
 
@@ -130,7 +132,7 @@ export default class test extends JetView{
 
 		let newGamebtn = { 
 			view:"button", 
-			label:"Start new game!", 
+			label:_("Start new game!"), 
 			width:120,
 			align:"center",
 			click:(id, event)=>{
@@ -166,11 +168,12 @@ export default class test extends JetView{
 	}
 
 	chooseTest(){
+		const _ = this.app.getService("locale")._;
 		
 		let list = this.getRoot().queryView({view:"list"});
 		let item = list.getSelectedItem();
 		if(item === undefined){
-			webix.message({text:"You should choose group",type:"error"});
+			webix.message({text:_("You should choose group"),type:"error"});
 			return false
 		}
 
@@ -235,14 +238,16 @@ export default class test extends JetView{
 	}
 	
 	checkAnswer(id, event){
+		const _ = this.app.getService("locale")._;
+
 		let choose = $$(id).getValue();
 		
 		if(choose == actualWord.translate){
 			userResult+=markOneWord;
 
-			webix.message({text:"It's right"});
+			webix.message({text:_("It's right")});
 		} else {
-			webix.message({text:"Wrong",type:"error"});
+			webix.message({text:_("Wrong"),type:"error"});
 		}
 		
 		counter++;
@@ -251,7 +256,9 @@ export default class test extends JetView{
 	}
 
 	endGame(){
-		$$("resultLabel").setValue("Your result: "+userResult);
+		const _ = this.app.getService("locale")._;
+
+		$$("resultLabel").setValue(_("Your result: ")+userResult);
 		$$("testTempl").hide();
 		$$("endTempl").show();
 
