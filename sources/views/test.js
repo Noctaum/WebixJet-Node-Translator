@@ -23,7 +23,16 @@ export default class test extends JetView{
 		let list =  {
 			view: "list",
 			select:true,
-			template:(item)=>(`${item.name} / ${item.created.slice(0,10)}`),
+			template:(item)=>{
+				let nowDate;
+				if (item.created) {
+						nowDate = item.created.slice(0,10)
+				} else {
+					let date = new Date();
+					nowDate = date.toISOString().slice(0,10);
+				}
+				return `${item.name} / ${nowDate}`;
+			},
 		};
 
 		let startButton = { 

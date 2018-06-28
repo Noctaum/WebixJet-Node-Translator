@@ -16,6 +16,7 @@ export default {
 
 	//results
 	"New Result!":"New Result!",
+	"Save in Exel":"Save in Exel",
 
 	//start
 	"Translate":"Translate",

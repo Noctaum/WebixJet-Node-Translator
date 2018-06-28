@@ -14,7 +14,7 @@ export default class results extends JetView{
 						nowDate = item.created.slice(0,10)
 				} else {
 					let date = new Date();
-					nowDate = date.toDateString();
+					nowDate = date.toISOString().slice(0,10);
 				}
 				let order;
 				if(item.order){
@@ -27,9 +27,26 @@ export default class results extends JetView{
 			select:true,
 		};
 
+		let saveButton = { 
+			view:"button", 
+			label:_("Save in Exel"), 
+			width:140,
+			align:"left",
+			click:()=>{
+				webix.toExcel(this.getRoot().queryView({view:"list"}),{columns:{
+					"user":true,
+					"result":true,
+					"created":true,
+				}});
+			}
+		};
+
+		
+
 		return {
 			rows:[
-				list
+				saveButton,
+				list,	
 			]
 		};
 			
