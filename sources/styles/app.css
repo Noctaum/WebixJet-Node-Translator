@@ -1,0 +1,21 @@
+.deleteButton{
+	width:60px;
+	text-align: center;
+	font-weight:bold;
+	float:right;
+	background-color:#555;
+	color:white;
+	border-radius:3px;
+	margin-left: 2px;
+}
+
+.editButton{
+	width:60px;
+	text-align: center;
+	font-weight:bold;
+	float:right;
+	background-color:#555;
+	color:white;
+	border-radius:3px;
+	margin-left: 2px;
+}
