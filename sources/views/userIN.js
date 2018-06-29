@@ -3,49 +3,50 @@ import {JetView} from "webix-jet";
 export default class DataTable extends JetView{
 	config(){
 
-	const _ = this.app.getService("locale")._;
+		const _ = this.app.getService("locale")._;
 
-	let backBut = { 
-		view:"button", 
-		value:_("Cancel"),
-		click: ()=>{
-			this.show(`../start/transl`);
-		}
-	};
-
-	let addBut = {
-		view:"button", 
-		value:_("Login"), 
-		type:"form",
-		click:()=>{
-			let values = this.getRoot().queryView({view:"form"}).getValues();
-			let userDo = this.getParam("user",true);
-			if(userDo === "new") {
-				webix.ajax().post('http://localhost:8096/user/register', values, (text, json)=>{
-					this.userAuthenticate(json);
-				});
-			} else {
-				webix.ajax().post('http://localhost:8096/user/login', values, (text, json)=>{
-					this.userAuthenticate(json);
-				});
+		let backBut = { 
+			view:"button", 
+			value:_("Cancel"),
+			click: ()=>{
+				this.show("../start/transl");
 			}
-		}
-	};
+		};
 
-	let log = {
-		view:"form", 
-		width:300,
-		elements:[
-			{ view:"text", label:_("Email"), name:"username"},
-			{ view:"text", type:"password", label:_("Password"), name:"password"},
-			{ 
-				margin:5, 
-				cols:[
-					addBut,
-					backBut,
-			]}
-		]
-	};
+		let addBut = {
+			view:"button", 
+			value:_("Login"), 
+			type:"form",
+			click:()=>{
+				let values = this.getRoot().queryView({view:"form"}).getValues();
+				let userDo = this.getParam("user",true);
+				if(userDo === "new") {
+					webix.ajax().post("http://localhost:8096/user/register", values, (text, json)=>{
+						this.userAuthenticate(json);
+					});
+				} else {
+					webix.ajax().post("http://localhost:8096/user/login", values, (text, json)=>{
+						this.userAuthenticate(json);
+					});
+				}
+			}
+		};
+
+		let log = {
+			view:"form", 
+			width:300,
+			elements:[
+				{ view:"text", label:_("Email"), name:"username"},
+				{ view:"text", type:"password", label:_("Password"), name:"password"},
+				{ 
+					margin:5, 
+					cols:[
+						addBut,
+						backBut,
+					]
+				}
+			]
+		};
 
 		return {rows:[
 			{},
@@ -72,7 +73,7 @@ export default class DataTable extends JetView{
 		} else {
 			localStorage["user"] = data;
 			this.app.getService("user").setUser({name:data, here: true});
-			this.show(`../start/transl`);
+			this.show("../start/transl");
 		}
 	}
 }

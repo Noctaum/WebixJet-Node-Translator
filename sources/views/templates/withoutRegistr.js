@@ -49,7 +49,7 @@ export default class DataTable extends JetView{
 			]
 		};
 
-		return header
+		return header;
 	}
 
 	toggleLanguage(){

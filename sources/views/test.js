@@ -1,7 +1,7 @@
 import {JetView} from "webix-jet";
 import {group} from "models/group";
 import {result} from "models/result";
-import * as word from "models/word";
+//import * as word from "models/word";
 
 let groupWord;
 let actualWord;
@@ -14,7 +14,7 @@ export default class test extends JetView{
 
 		const _ = this.app.getService("locale")._;
 
-//Start game
+		//Start game
 		let label = {
 			view:"label",
 			label:_("Choose group for test"),
@@ -26,7 +26,7 @@ export default class test extends JetView{
 			template:(item)=>{
 				let nowDate;
 				if (item.created) {
-						nowDate = item.created.slice(0,10)
+					nowDate = item.created.slice(0,10);
 				} else {
 					let date = new Date();
 					nowDate = date.toISOString().slice(0,10);
@@ -54,16 +54,16 @@ export default class test extends JetView{
 			]
 		};
 
-//Game 
+		//Game 
 		let mainWord = {
 			id:"mainWord",
 			view:"label",
 			label:"Word",
-			align:'center',
+			align:"center",
 		};
 
 		let firstBtn = { 
-			id:'Btn1',
+			id:"Btn1",
 			view:"button", 
 			label:"1", 
 			width:120,
@@ -74,7 +74,7 @@ export default class test extends JetView{
 		};
 
 		let secondBtn = { 
-			id:'Btn2',
+			id:"Btn2",
 			view:"button", 
 			label:"2", 
 			width:120,
@@ -85,7 +85,7 @@ export default class test extends JetView{
 		};
 
 		let thirdBtn = { 
-			id:'Btn3',
+			id:"Btn3",
 			view:"button", 
 			label:"3", 
 			width:120,
@@ -96,7 +96,7 @@ export default class test extends JetView{
 		};
 
 		let fourthBtn = { 
-			id:'Btn4',
+			id:"Btn4",
 			view:"button", 
 			label:"4", 
 			width:120,
@@ -114,7 +114,7 @@ export default class test extends JetView{
 				fourthBtn,
 
 			]
-		}
+		};
 
 		let testTemplate = {
 			id:"testTempl",
@@ -125,18 +125,18 @@ export default class test extends JetView{
 			]
 		};
 
-//End game 
+		//End game 
 		let endLabel = {
 			view:"label",
 			label:_("End Game"),
-			align:'center',
+			align:"center",
 		};
 
 		let resultLabel = {
 			id:"resultLabel",
 			view:"label",
 			label:"Word",
-			align:'center',
+			align:"center",
 		};
 
 		let newGamebtn = { 
@@ -144,8 +144,8 @@ export default class test extends JetView{
 			label:_("Start new game!"), 
 			width:120,
 			align:"center",
-			click:(id, event)=>{
-				this.show(`../testMenu`);
+			click:()=>{
+				this.show("../testMenu");
 			}
 		};
 
@@ -158,7 +158,7 @@ export default class test extends JetView{
 				resultLabel,
 				newGamebtn,
 			]
-		}
+		};
 
 		return  {
 			rows:[
@@ -166,13 +166,13 @@ export default class test extends JetView{
 				testTemplate,
 				endTemplare,
 			]
-		}
+		};
 	}
-  	
+
 	init(view){
-		$$("startTempl").show();
-		$$("testTempl").hide();
-		$$("endTempl").hide();
+		this.$$("startTempl").show();
+		this.$$("testTempl").hide();
+		this.$$("endTempl").hide();
 		view.queryView({view:"list"}).sync(group);
 	}
 
@@ -183,15 +183,15 @@ export default class test extends JetView{
 		let item = list.getSelectedItem();
 		if(item === undefined){
 			webix.message({text:_("You should choose group"),type:"error"});
-			return false
+			return false;
 		}
 
-		$$("startTempl").hide();
-		$$("testTempl").show();
+		this.$$("startTempl").hide();
+		this.$$("testTempl").show();
 
-	    webix.ajax().get("http://localhost:8096/word"+"/test", {filter: item.words}, (text, json)=>{
-	    	let data = json.json();
-	    	if(data.problem){
+		webix.ajax().get("http://localhost:8096/word"+"/test", {filter: item.words}, (text, json)=>{
+			let data = json.json();
+			if(data.problem){
 				webix.message({text:data.message,type:"error"});
 			} else {
 				this.choosePartOfSpeech(data);
@@ -201,7 +201,7 @@ export default class test extends JetView{
 	}
 
 	choosePartOfSpeech(data){
-		let length = data.length
+		let length = data.length;
 		let numForPartSpeech = Math.floor(Math.random()*length);
 		let partSpeech = data[numForPartSpeech].partSpeech;
 		let massForTest = data.filter(item=>(item.partSpeech === partSpeech));
@@ -226,30 +226,30 @@ export default class test extends JetView{
 
 		let data = groupWord;
 		
-		let length = data.length
+		let length = data.length;
 		let rightWord = Math.floor(Math.random()*length);
 
 		actualWord = data[rightWord];
 
 		let word = data[rightWord].word;
-		$$("mainWord").setValue(word);
+		this.$$("mainWord").setValue(word);
 		let massBtn = [1,2,3,4];
 		let btnRight = Math.floor(Math.random()*4)+1;
 		let massWithoutRight = massBtn.filter(item=>(item !== btnRight));
 
-		$$("Btn"+btnRight).setValue(actualWord.translate);
+		this.$$("Btn"+btnRight).setValue(actualWord.translate);
 		let btnLength = massWithoutRight.length;
 		for (let i=0; i<btnLength; i++){
 			let num = Math.floor(Math.random()*length);
-			$$("Btn"+massWithoutRight[i]).setValue(data[num].translate);
+			this.$$("Btn"+massWithoutRight[i]).setValue(data[num].translate);
 		}
 
 	}
 	
-	checkAnswer(id, event){
+	checkAnswer(id){
 		const _ = this.app.getService("locale")._;
 
-		let choose = $$(id).getValue();
+		let choose = this.$$(id).getValue();
 		
 		if(choose == actualWord.translate){
 			userResult+=markOneWord;
@@ -267,9 +267,9 @@ export default class test extends JetView{
 	endGame(){
 		const _ = this.app.getService("locale")._;
 
-		$$("resultLabel").setValue(_("Your result: ")+userResult);
-		$$("testTempl").hide();
-		$$("endTempl").show();
+		this.$$("resultLabel").setValue(_("Your result: ")+userResult);
+		this.$$("testTempl").hide();
+		this.$$("endTempl").show();
 
 		let userForResult = "unknown";
 		let user = localStorage["user"];

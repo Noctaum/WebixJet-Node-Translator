@@ -3,10 +3,10 @@ import {JetView} from "webix-jet";
 export default class DataTable extends JetView{
 	config(){
 
-	const lang = this.app.getService("locale").getLang();
-	const _ = this.app.getService("locale")._;
+		const lang = this.app.getService("locale").getLang();
+		const _ = this.app.getService("locale")._;
 
-	let segment =	{ 
+		let segment =	{ 
 			view:"segmented", 
 			value:lang, 
 			inputWidth:250, 
@@ -19,25 +19,25 @@ export default class DataTable extends JetView{
 			align:"left"
 		};
 
-	let log = {
-		view:"label",
-		width:100,
-		template:()=>{
-			let user = this.app.getService("user").getUser();
-			return user.name;
-		},	
-	};
-		
-	let butOut = {
-		view: "button", 
-		label:_("Log out"),
-		width:100,
-		click: ()=>{
-			let user = this.app.getService("user").setUser({name: undefined,here: false,});
-			delete localStorage["user"];
-			this.app.refresh("/start");
-		}
-	};
+		let log = {
+			view:"label",
+			width:100,
+			template:()=>{
+				let user = this.app.getService("user").getUser();
+				return user.name;
+			},	
+		};
+			
+		let butOut = {
+			view: "button", 
+			label:_("Log out"),
+			width:100,
+			click: ()=>{
+				this.app.getService("user").setUser({name: undefined,here: false,});
+				delete localStorage["user"];
+				this.app.refresh("/start");
+			}
+		};
 
 		let header = { 
 			view: "toolbar",
@@ -49,7 +49,7 @@ export default class DataTable extends JetView{
 			]
 		};
 
-		return header
+		return header;
 	}
 
 	toggleLanguage(){

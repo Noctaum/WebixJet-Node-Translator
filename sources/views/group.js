@@ -35,8 +35,8 @@ export default class DataTable extends JetView{
 			view: "grouplist",
 			select:true,
 			//templateBack:"#name# <span class='editButton'>Edit</span> <span class='deleteButton'>Remove</span>",
-	  		//templateGroup:"#name#",
-	  		//templateItem:"#_id#",
+			//templateGroup:"#name#",
+			//templateItem:"#_id#",
 			template:(item)=>(`${item.name} / ${item.words.length} -ptc <span class='editButton'>${_("Edit")}</span> <span class='deleteButton'>${_("Remove")}</span>`),
 			onClick:{
 				deleteButton:(e, id)=>{
@@ -47,7 +47,7 @@ export default class DataTable extends JetView{
 				},
 			},
 			on:{
-				onAfterSelect:(id)=>{
+				onAfterSelect:()=>{
 					let list = this.getRoot().queryView({view:"grouplist"});
 					let listOneGroup = this.getRoot().queryView({view:"list"});
 					let item = list.getSelectedItem();

@@ -19,7 +19,7 @@ export default class Start extends JetView{
 			} else {
 				header =  withoutRegistr;
 			}
-		};
+		}
 
 		let tabbar = { 
 			view: "tabbar",
@@ -55,6 +55,6 @@ export default class Start extends JetView{
 
 	}
 	ready(){
-		this.show(`../start/transl`);
+		this.show("../start/transl");
 	}
 }

@@ -40,7 +40,7 @@ export default class DataTable extends JetView{
 		return {rows:[search, addBut, list]};
 	}
 	
-	init(view){
+	init(){
 		this._jetPopup = this.ui(WindowEdit);
 		//view.queryView({view:"list"}).sync(word);
 	}

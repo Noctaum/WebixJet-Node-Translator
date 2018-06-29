@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {part} from "models/partSpeech";
+//import {part} from "models/partSpeech";
 import * as word from "models/word";
 import {group} from "models/group";
 

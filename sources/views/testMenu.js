@@ -11,7 +11,7 @@ export default class testMenu extends JetView{
 			width:120,
 			align:"center",
 			click: ()=>{
-				this.show(`../test`);
+				this.show("../test");
 			}	
 		};
 
@@ -21,7 +21,7 @@ export default class testMenu extends JetView{
 			width:120,
 			align:"center",
 			click: ()=>{
-				this.show(`../results`);
+				this.show("../results");
 			}	
 		};
   

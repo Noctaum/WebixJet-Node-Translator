@@ -11,7 +11,7 @@ export default class results extends JetView{
 			template:(item) => {
 				let nowDate;
 				if (item.created) {
-						nowDate = item.created.slice(0,10)
+					nowDate = item.created.slice(0,10);
 				} else {
 					let date = new Date();
 					nowDate = date.toISOString().slice(0,10);
@@ -22,7 +22,7 @@ export default class results extends JetView{
 				} else {
 					order = _("New Result!");
 				}
-				return `${order}. ${item.user} score: ${item.result} - ${nowDate}`
+				return `${order}. ${item.user} score: ${item.result} - ${nowDate}`;
 			},		 
 			select:true,
 		};
